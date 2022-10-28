@@ -1,10 +1,14 @@
 import React from 'react';
+import { Layout } from './components/Layout/Layout';
+import { Title } from './components/Title/Title';
 
 function App() {
   return (
-    <div>
-      <h1 className='text-5xl font-bold underline'>Hello world!</h1>
-    </div>
+    <>
+      <Layout>
+        <Title>Title</Title>
+      </Layout>
+    </>
   );
 }
 
