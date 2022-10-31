@@ -5,7 +5,7 @@ export const usePrefDataQuery = () => {
   const [prefData, setPrefData] = useState<{
     message: null;
     result: {
-      prefCode: number;
+      prefCode: string;
       prefName: string;
     }[];
   } | null>(null);
