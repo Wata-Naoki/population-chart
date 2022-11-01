@@ -65,7 +65,7 @@ export const PrefPopulationChart = () => {
           {prefData?.result?.map((pref) => {
             return (
               <div key={pref.prefCode} className='flex gap-1'>
-                <input type='checkbox' value={pref.prefCode} onChange={handleChange} />
+                <input type='checkbox' value={pref.prefCode} onChange={handleChange} className='focus:outline-none' />
                 <p>{pref.prefName}</p>
               </div>
             );
