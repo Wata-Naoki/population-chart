@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios';
 import { useCallback, useState } from 'react';
-import { PopulationData, PrefNum } from '../../Pages/PrefPopulationChart';
+import { PopulationData, SelectedPref } from '../../Pages/PrefPopulationChart';
 
 export const usePopulationDataQuery = () => {
   const [populationData, setPopulationData] = useState<PopulationData>({
@@ -13,9 +13,7 @@ export const usePopulationDataQuery = () => {
     label: '',
   });
 
-  const getPopulationData = useCallback(async ({ prefCode, prefName }: PrefNum) => {
-    console.log(prefCode, prefName);
-
+  const getPopulationData = useCallback(async ({ prefCode, prefName }: SelectedPref) => {
     if (prefCode) {
       await axios
         .get(`https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?&prefCode=${prefCode}`, {

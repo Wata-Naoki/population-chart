@@ -7,8 +7,8 @@ import { Layout } from '../components/Layout/Layout';
 import { SectionTitle } from '../components/Text/SectionTitle';
 import { Title } from '../components/Text/Title';
 
-// prefNum
-export type PrefNum = {
+// 選択した県の番号と名前を格納する型
+export type SelectedPref = {
   prefCode: string | undefined;
   prefName: string | undefined;
 };
@@ -36,14 +36,14 @@ export type PopulationYearValue = {
 export const PrefPopulationChart = () => {
   const { prefData } = usePrefDataQuery();
   const { populationData, getPopulationData } = usePopulationDataQuery();
-  const [prefNum, setPrefNum] = useState<PrefNum[]>([]);
+  const [selectedPref, setSelectedPref] = useState<SelectedPref[]>([]);
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const prefValue = prefData?.result?.find((pref) => pref.prefCode == e.target.value);
-    if (prefNum.find((pref) => pref.prefCode === prefValue?.prefCode)) {
-      setPrefNum(
-        prefNum.filter((pref) => {
+    if (selectedPref.find((pref) => pref.prefCode === prefValue?.prefCode)) {
+      setSelectedPref(
+        selectedPref.filter((pref) => {
           return pref.prefCode !== prefValue?.prefCode;
         })
       );
@@ -53,7 +53,7 @@ export const PrefPopulationChart = () => {
         })
       );
     } else {
-      setPrefNum((prev) => [...prev, { prefCode: prefValue?.prefCode, prefName: prefValue?.prefName }]);
+      setSelectedPref((prev) => [...prev, { prefCode: prefValue?.prefCode, prefName: prefValue?.prefName }]);
       await getPopulationData({ prefCode: prefValue?.prefCode, prefName: prefValue?.prefName });
     }
   };
@@ -68,6 +68,7 @@ export const PrefPopulationChart = () => {
     if (!prefList.find((pref) => pref.prefCode === populationData.prefCode)) {
       setPrefList((prev) => [...prev, populationData]);
     }
+    console.log(prefList);
   }, [populationData]);
 
   return (
@@ -90,7 +91,7 @@ export const PrefPopulationChart = () => {
       <div>
         <div className='text-center my-2'>選択</div>
         <div className='flex flex-wrap gap-3 p-4'>
-          {prefNum.map((pref: PrefNum) => {
+          {selectedPref.map((pref: SelectedPref) => {
             return <div key={pref.prefCode}>{pref.prefCode}</div>;
           })}
         </div>

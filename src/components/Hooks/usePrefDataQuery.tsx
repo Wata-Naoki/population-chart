@@ -16,7 +16,6 @@ export const usePrefDataQuery = () => {
         headers: { 'X-API-KEY': process.env.REACT_APP_API_KEY },
       })
       .then((response) => {
-        console.log(response.data);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         setPrefData(response.data);
       })
