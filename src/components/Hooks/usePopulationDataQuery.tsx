@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios';
@@ -8,9 +9,8 @@ export const usePopulationDataQuery = () => {
   const [populationData, setPopulationData] = useState<PopulationData>({
     prefCode: '',
     prefName: '',
-    boundaryYear: '',
-    data: { data: [{ year: null, value: null }], label: '' },
-    label: '',
+    yearData: [],
+    valueData: [],
   });
 
   const getPopulationData = useCallback(async ({ prefCode, prefName }: SelectedPref) => {
@@ -22,13 +22,18 @@ export const usePopulationDataQuery = () => {
           },
         })
         .then((response) => {
+          //グラフで扱えるようにデータを整形
+          //yearを取得。グラフのx軸に使用
+          const yearData = response.data.result.data[0].data.map((data: { year: number }) => data.year);
+          //valueを取得。グラフのy軸に使用
+          const valueData = response.data.result.data[0].data.map((data: { value: number }) => data.value);
+
           setPopulationData((prev: PopulationData) => ({
             ...prev,
             prefCode: prefCode,
             prefName: prefName,
-            boundaryYear: response.data.result.boundaryYear,
-            data: response.data.result.data[0],
-            label: response.data.result.data[0].label,
+            yearData: yearData,
+            valueData: valueData,
           }));
         })
         .catch((error) => {

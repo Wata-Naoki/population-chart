@@ -8,7 +8,7 @@ export const usePrefDataQuery = () => {
       prefCode: string;
       prefName: string;
     }[];
-  } | null>(null);
+  }>();
 
   useEffect(() => {
     axios

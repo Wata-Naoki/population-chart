@@ -16,49 +16,34 @@ export type SelectedPref = {
 export type PopulationData = {
   prefCode: string | undefined;
   prefName: string | undefined;
-  boundaryYear: string;
-  data: {
-    data: {
-      year: number | null;
-      value: number | null;
-    }[];
-    label: string;
-  };
-  label: string;
-};
-
-//それぞれの県のyearとvalueの型定義
-export type PopulationYearValue = {
-  year: number | null;
-  value: number | null;
+  yearData: number[] | undefined;
+  valueData: number[] | undefined;
 };
 
 export const PrefPopulationChart = () => {
   const { prefData } = usePrefDataQuery();
   const { populationData, getPopulationData } = usePopulationDataQuery();
-  const [selectedPref, setSelectedPref] = useState<SelectedPref[]>([]);
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    //選択した県の番号と名前を取得
     const prefValue = prefData?.result?.find((pref) => pref.prefCode == e.target.value);
-    if (selectedPref.find((pref) => pref.prefCode === prefValue?.prefCode)) {
-      setSelectedPref(
-        selectedPref.filter((pref) => {
-          return pref.prefCode !== prefValue?.prefCode;
-        })
-      );
+    //選択した県がすでに選択されているか確認。
+    if (prefList.find((pref) => pref.prefCode === prefValue?.prefCode)) {
+      //すでに選択済みであれば、選択済みの県を削除
       setPrefList(
         prefList.filter((pref) => {
           return pref.prefCode !== prefValue?.prefCode && pref.prefCode !== '';
         })
       );
     } else {
-      setSelectedPref((prev) => [...prev, { prefCode: prefValue?.prefCode, prefName: prefValue?.prefName }]);
+      //選択されていなければ選択した県を追加するために、人口構成データをfetch
       await getPopulationData({ prefCode: prefValue?.prefCode, prefName: prefValue?.prefName });
     }
   };
 
   useEffect(() => {
+    //初回レンダリング時の空のデータを削除
     setPrefList(
       prefList.filter((pref) => {
         return pref.prefCode !== '';
@@ -68,7 +53,6 @@ export const PrefPopulationChart = () => {
     if (!prefList.find((pref) => pref.prefCode === populationData.prefCode)) {
       setPrefList((prev) => [...prev, populationData]);
     }
-    console.log(prefList);
   }, [populationData]);
 
   return (
@@ -88,30 +72,29 @@ export const PrefPopulationChart = () => {
           })}
         </div>
       </div>
-      <div>
-        <div className='text-center my-2'>選択</div>
-        <div className='flex flex-wrap gap-3 p-4'>
-          {selectedPref.map((pref: SelectedPref) => {
-            return <div key={pref.prefCode}>{pref.prefCode}</div>;
-          })}
-        </div>
-      </div>
 
       <div>
-        <div className='text-center my-2'>人口構成</div>
+        <h2 className='text-center my-2'>人口構成</h2>
         <div className='flex justify-center flex-wrap gap-2 p-2'>
           {prefList?.map((pref: PopulationData, i: number) => {
             return (
               <div key={`${i}-${i}`}>
                 <div className='text-green-500'>{pref.prefCode}</div>
                 <div className='text-gray-600'>{pref.prefName}</div>
-                <div className='text-purple-500'>{pref.boundaryYear}</div>
-                {pref.data?.data?.map((prefChild: PopulationYearValue, index: number) => {
+                {pref?.yearData?.map((prefChild: number, index: number) => {
                   return (
                     <div key={`${i}-${index}`}>
                       <div className='flex gap-2 mr-2'>
-                        <div className='text-red-500'>{prefChild.year}</div>
-                        <div className='text-blue-500'>{prefChild.value}</div>
+                        <div className='text-red-500'>{prefChild}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+                {pref?.valueData?.map((prefChild: number, index: number) => {
+                  return (
+                    <div key={`${i}-${index}`}>
+                      <div className='flex gap-2 mr-2'>
+                        <div className='text-blue-500'>{prefChild}</div>
                       </div>
                     </div>
                   );
