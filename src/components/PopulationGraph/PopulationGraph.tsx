@@ -68,9 +68,5 @@ export const PopulationGraphContainer: React.FC<Props> = ({ prefList }) => {
 
     series: convertData(prefList),
   };
-  return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    </div>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
 };
