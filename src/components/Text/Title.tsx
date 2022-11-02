@@ -6,6 +6,6 @@ type TitleProps = {
 
 export const Title: React.FC<TitleProps> = ({ children }) => {
   return (
-    <div className='sm:text-4xl text-2xl font-bold text-center bg-zinc-300 text-gray-600	py-4 w-full'>{children}</div>
+    <div className='sm:text-4xl text-2xl font-bold text-center bg-neutral-200 text-zinc-500	py-4 w-full'>{children}</div>
   );
 };

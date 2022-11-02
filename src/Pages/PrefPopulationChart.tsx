@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout/Layout';
 import { PopulationGraphContainer } from '../components/PopulationGraph/PopulationGraph';
 import { SectionTitle } from '../components/Text/SectionTitle';
 import { Title } from '../components/Text/Title';
+import { Loading } from '../components/Loading/Loading';
 
 // 選択した県の番号と名前を格納する型
 export type SelectedPref = {
@@ -20,7 +21,7 @@ export type PopulationData = {
 };
 
 export const PrefPopulationChart = () => {
-  const { prefData } = usePrefDataQuery();
+  const { prefData, isLoading } = usePrefDataQuery();
   const { populationData, getPopulationData } = usePopulationDataQuery();
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
 
@@ -54,11 +55,15 @@ export const PrefPopulationChart = () => {
     }
   }, [populationData]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Layout>
       <Title>都道府県別の総人口推移</Title>
 
-      <div className='border m-6 p-4 rounded-md shadow 2xl:max-w-screen-2xl'>
+      <div className='border my-2 mx-6 p-4 rounded-md shadow 2xl:max-w-screen-2xl'>
         <SectionTitle>都道府県</SectionTitle>
         <div className='w-full flex  flex-wrap p-8 gap-3'>
           {prefData?.result?.map((pref) => {
@@ -66,14 +71,14 @@ export const PrefPopulationChart = () => {
               <div key={pref.prefCode} className='flex gap-1'>
                 {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <input type='checkbox' value={pref.prefCode} onChange={handleChange} className='focus:outline-none' />
-                <p>{pref.prefName}</p>
+                <p className='text-zinc-500'>{pref.prefName}</p>
               </div>
             );
           })}
         </div>
       </div>
 
-      <div className='flex justify-center'>
+      <div className='flex justify-center mx-4'>
         <div className='w-screen 2xl:max-w-screen-2xl'>
           <PopulationGraphContainer prefList={prefList} />
         </div>
