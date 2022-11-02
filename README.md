@@ -10,10 +10,16 @@ npm start
 
 ## テスト（playwrightというライブラリを使用）
 
-以下のテストコマンドを実行し、テスト結果をブラウザに表示する
+テストコマンドを実行
 
 ```bash
-npx playwright test && npx playwright show-report 
+npx playwright test
+```
+
+テスト結果をブラウザに表示
+
+```bash
+npx playwright show-report 
 ```
 
 ## デプロイURL
