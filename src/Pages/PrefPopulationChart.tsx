@@ -58,7 +58,7 @@ export const PrefPopulationChart = () => {
     <Layout>
       <Title>都道府県別の総人口推移</Title>
 
-      <div className='border m-6 p-4 rounded-md shadow lg:max-w-[75%]'>
+      <div className='border m-6 p-4 rounded-md shadow 2xl:max-w-screen-2xl'>
         <SectionTitle>都道府県</SectionTitle>
         <div className='w-full flex  flex-wrap p-8 gap-3'>
           {prefData?.result?.map((pref) => {
@@ -74,7 +74,7 @@ export const PrefPopulationChart = () => {
       </div>
 
       <div className='flex justify-center'>
-        <div className='w-screen lg:max-w-[75%]'>
+        <div className='w-screen 2xl:max-w-screen-2xl'>
           <PopulationGraphContainer prefList={prefList} />
         </div>
       </div>
