@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { usePopulationDataQuery } from '../components/Hooks/usePopulationDataQuery';
-import { usePrefDataQuery } from '../components/Hooks/usePrefDataQuery';
+import { usePopulationDataQuery } from '../hooks/usePopulationDataQuery';
+import { usePrefDataQuery } from '../hooks/usePrefDataQuery';
 import { Layout } from '../components/Layout/Layout';
 import { PopulationGraphContainer } from '../components/PopulationGraph/PopulationGraph';
 import { SectionTitle } from '../components/Text/SectionTitle';

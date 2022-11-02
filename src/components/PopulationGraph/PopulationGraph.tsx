@@ -1,5 +1,5 @@
 import React from 'react';
-import { PopulationData } from '../../Pages/PrefPopulationChart';
+import { PopulationData } from '../../pages/PrefPopulationChart';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 export type Props = {

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios';
 import { useCallback, useState } from 'react';
-import { PopulationData, SelectedPref } from '../../Pages/PrefPopulationChart';
+import { PopulationData, SelectedPref } from '../pages/PrefPopulationChart';
 
 export const usePopulationDataQuery = () => {
   const [populationData, setPopulationData] = useState<PopulationData>({
