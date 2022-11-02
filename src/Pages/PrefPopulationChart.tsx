@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useState } from 'react';
 import { usePopulationDataQuery } from '../components/Hooks/usePopulationDataQuery';
 import { usePrefDataQuery } from '../components/Hooks/usePrefDataQuery';
 import { Layout } from '../components/Layout/Layout';
+import { PopulationGraphContainer } from '../components/PopulationGraph/PopulationGraph';
 import { SectionTitle } from '../components/Text/SectionTitle';
 import { Title } from '../components/Text/Title';
 
@@ -59,12 +58,13 @@ export const PrefPopulationChart = () => {
     <Layout>
       <Title>都道府県別の総人口推移</Title>
 
-      <div className='border m-6 p-4 rounded-md shadow'>
+      <div className='border m-6 p-4 rounded-md shadow 2xl:max-w-screen-2xl'>
         <SectionTitle>都道府県</SectionTitle>
         <div className='w-full flex  flex-wrap p-8 gap-3'>
           {prefData?.result?.map((pref) => {
             return (
               <div key={pref.prefCode} className='flex gap-1'>
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <input type='checkbox' value={pref.prefCode} onChange={handleChange} className='focus:outline-none' />
                 <p>{pref.prefName}</p>
               </div>
@@ -73,35 +73,9 @@ export const PrefPopulationChart = () => {
         </div>
       </div>
 
-      <div>
-        <h2 className='text-center my-2'>人口構成</h2>
-        <div className='flex justify-center flex-wrap gap-2 p-2'>
-          {prefList?.map((pref: PopulationData, i: number) => {
-            return (
-              <div key={`${i}-${i}`}>
-                <div className='text-green-500'>{pref.prefCode}</div>
-                <div className='text-gray-600'>{pref.prefName}</div>
-                {pref?.yearData?.map((prefChild: number, index: number) => {
-                  return (
-                    <div key={`${i}-${index}`}>
-                      <div className='flex gap-2 mr-2'>
-                        <div className='text-red-500'>{prefChild}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-                {pref?.valueData?.map((prefChild: number, index: number) => {
-                  return (
-                    <div key={`${i}-${index}`}>
-                      <div className='flex gap-2 mr-2'>
-                        <div className='text-blue-500'>{prefChild}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+      <div className='flex justify-center'>
+        <div className='w-screen 2xl:max-w-screen-2xl'>
+          <PopulationGraphContainer prefList={prefList} />
         </div>
       </div>
     </Layout>
