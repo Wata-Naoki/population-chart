@@ -25,8 +25,8 @@ export type PrefProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   prefList: PopulationData[];
 };
-//スタイルの型定義
-export type StyleProps = {
+//LayoutのPropsの型定義
+export type LayoutProps = {
   children: React.ReactNode;
 };
 //SectionTitleのPropsの型定義

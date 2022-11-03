@@ -1,6 +1,7 @@
 import React from 'react';
 import { PrefProps } from '../../types/types';
 
+//47都道府県のチェックボックスを表示するコンポーネント
 export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefList }) => {
   return (
     <>
