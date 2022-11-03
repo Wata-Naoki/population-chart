@@ -1,9 +1,10 @@
 import React from 'react';
+import { StyleProps } from '../../types/types';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return <div className='flex flex-col justify-center items-center min-w-full gap-6   bg-white  grow'>{children}</div>;
+export const Layout: React.FC<StyleProps> = ({ children }) => {
+  return (
+    <div className='flex flex-col items-center justify-center min-w-full pb-10 bg-white gap-y-10 2xl:gap-y-20 sm:pb-0 '>
+      {children}
+    </div>
+  );
 };

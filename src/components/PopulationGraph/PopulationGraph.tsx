@@ -1,30 +1,17 @@
 import React from 'react';
-import { PopulationData } from '../../pages/PrefPopulationChart';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-export type Props = {
-  prefList: PopulationData[];
-};
+import { convertToSeriesData } from '../../helpers/convertToSeriesData';
+import { PopulationGraphProps } from '../../types/types';
 
-export const PopulationGraphContainer: React.FC<Props> = ({ prefList }) => {
-  //グラフのseriesのデータに変換
-  const convertData = (prefList: PopulationData[]) => {
-    const seriesData = prefList.map((pref) => {
-      return {
-        name: pref.prefName,
-        data: pref.valueData,
-      };
-    });
-    return seriesData;
-  };
-
+export const PopulationGraphContainer: React.FC<PopulationGraphProps> = ({ prefList }) => {
   const options = {
     accessibility: {
       enabled: false,
     },
     title: {
-      text: '都道府県別人口構成グラフ',
-      margin: 40,
+      text: '',
+      margin: 0,
     },
 
     yAxis: {
@@ -66,7 +53,11 @@ export const PopulationGraphContainer: React.FC<Props> = ({ prefList }) => {
       },
     },
 
-    series: convertData(prefList),
+    series: convertToSeriesData(prefList),
   };
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <div className='w-screen 2xl:max-w-screen-2xl'>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 };

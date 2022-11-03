@@ -1,59 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { usePopulationDataQuery } from '../hooks/usePopulationDataQuery';
-import { usePrefDataQuery } from '../hooks/usePrefDataQuery';
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Layout } from '../components/Layout/Layout';
 import { PopulationGraphContainer } from '../components/PopulationGraph/PopulationGraph';
 import { SectionTitle } from '../components/Text/SectionTitle';
 import { Title } from '../components/Text/Title';
 import { Loading } from '../components/Loading/Loading';
-
-// 選択した県の番号と名前を格納する型
-export type SelectedPref = {
-  prefCode: string | undefined;
-  prefName: string | undefined;
-};
-//人口構成(PopulationData）の型定義
-export type PopulationData = {
-  prefCode: string | undefined;
-  prefName: string | undefined;
-  yearData: number[] | undefined;
-  valueData: number[] | undefined;
-};
+import { useHandleSelectedData } from '../hooks/useHandleSelectedData';
+import { Prefectures } from '../components/Prefectures/Prefectures';
+import { SectionLayout } from '../components/Layout/SectionLayout';
 
 export const PrefPopulationChart = () => {
-  const { prefData, isLoading } = usePrefDataQuery();
-  const { populationData, getPopulationData } = usePopulationDataQuery();
-  const [prefList, setPrefList] = useState<PopulationData[]>([]);
-
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //選択した県の番号と名前を取得
-    const prefValue = prefData?.result?.find((pref) => pref.prefCode == e.target.value);
-    //選択した県がすでに選択されているか確認。
-    if (prefList.find((pref) => pref.prefCode === prefValue?.prefCode)) {
-      //すでに選択済みであれば、選択済みの県を削除
-      setPrefList(
-        prefList.filter((pref) => {
-          return pref.prefCode !== prefValue?.prefCode && pref.prefCode !== '';
-        })
-      );
-    } else {
-      //選択されていなければ選択した県を追加するために、人口構成データをfetch
-      await getPopulationData({ prefCode: prefValue?.prefCode, prefName: prefValue?.prefName });
-    }
-  };
-
-  useEffect(() => {
-    //初回レンダリング時の空のデータを削除
-    setPrefList(
-      prefList.filter((pref) => {
-        return pref.prefCode !== '';
-      })
-    );
-    //prefListにないpopulationDataであれば追加
-    if (!prefList.find((pref) => pref.prefCode === populationData.prefCode)) {
-      setPrefList((prev) => [...prev, populationData]);
-    }
-  }, [populationData]);
+  //チェックボックスを選択した際のロジック処理
+  const { prefData, isLoading, prefList, handleChange } = useHandleSelectedData();
 
   if (isLoading) {
     return <Loading />;
@@ -63,26 +20,15 @@ export const PrefPopulationChart = () => {
     <Layout>
       <Title>都道府県別の総人口推移</Title>
 
-      <div className='border my-2 mx-6 p-4 rounded-md shadow 2xl:max-w-screen-2xl'>
+      <SectionLayout>
         <SectionTitle>都道府県</SectionTitle>
-        <div className='w-full flex  flex-wrap p-8 gap-3'>
-          {prefData?.result?.map((pref) => {
-            return (
-              <div key={pref.prefCode} className='flex gap-1'>
-                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-                <input type='checkbox' value={pref.prefCode} onChange={handleChange} className='focus:outline-none' />
-                <p className='text-zinc-500'>{pref.prefName}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+        <Prefectures handleChange={handleChange} prefData={prefData} prefList={prefList} />
+      </SectionLayout>
 
-      <div className='flex justify-center mx-4'>
-        <div className='w-screen 2xl:max-w-screen-2xl'>
-          <PopulationGraphContainer prefList={prefList} />
-        </div>
-      </div>
+      <SectionLayout variant='sub'>
+        <SectionTitle variant='sub'>都道府県別人口構成グラフ</SectionTitle>
+        <PopulationGraphContainer prefList={prefList} />
+      </SectionLayout>
     </Layout>
   );
 };
