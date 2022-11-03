@@ -57,7 +57,7 @@ export const PopulationGraphContainer: React.FC<PopulationGraphProps> = ({ prefL
   };
   return (
     <div className='w-screen 2xl:max-w-screen-2xl'>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      {prefList[0]?.prefCode && <HighchartsReact highcharts={Highcharts} options={options} />}
     </div>
   );
 };
