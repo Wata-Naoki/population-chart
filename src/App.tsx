@@ -1,4 +1,4 @@
-import { PrefPopulationChart } from './Pages/PrefPopulationChart.js';
+import { PrefPopulationChart } from './Pages/PrefPopulationChart';
 
 function App() {
   return (
