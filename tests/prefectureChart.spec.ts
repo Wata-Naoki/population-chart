@@ -13,7 +13,19 @@ test('初期表示のテスト', async ({ page }) => {
   ).toBeVisible();
 });
 
-test('チェックボックスをcheck or uncheckした際にグラフに反映されているかのテスト', async ({ page }) => {
+test('チェックボックスをcheckした際にグラフに反映されているかテスト', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  //北海道のチェックボックスをcheck
+  await page.locator('.focus\\:outline-none').first().check();
+  await expect(page.getByText('北海道')).toBeVisible();
+  //北海道のグラフが表示されているかチェック
+  await expect(page.locator('.highcharts-tracker-line')).toBeVisible();
+  //グラフ右側に北海道の名前が表示されているかチェック（北海道のグラフが表示されていることを確認するため）
+  await expect(page.getByText('北海道').nth(1)).toBeVisible();
+});
+
+test('チェックボックスを複数チェックした際にグラフに反映されているかテスト', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
   //北海道のチェックボックスをcheck
@@ -24,6 +36,17 @@ test('チェックボックスをcheck or uncheckした際にグラフに反映�
   //グラフ右側に北海道の名前が表示されているかチェック（北海道のグラフが表示されていることを確認するため）
   await expect(page.getByText('北海道').nth(1)).toBeVisible();
 
+  //青森県のチェックボックスをcheckし、グラフに反映されているかチェック
+  await page.locator('div:nth-child(2) > .focus\\:outline-none').check();
+  await expect(page.locator('g:nth-child(3) > .highcharts-tracker-line')).toBeVisible();
+  await expect(page.locator('text:has-text("青森県")')).toBeVisible();
+});
+
+test('チェックボックスをuncheckした際にラインチャートが消えているかのテスト', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  //北海道のチェックボックスをcheck
+  await page.locator('.focus\\:outline-none').first().check();
   //青森県のチェックボックスをcheckし、グラフに反映されているかチェック
   await page.locator('div:nth-child(2) > .focus\\:outline-none').check();
   await expect(page.locator('g:nth-child(3) > .highcharts-tracker-line')).toBeVisible();
