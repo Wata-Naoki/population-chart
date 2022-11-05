@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProps } from '../../types/types';
+import { StyleProps } from '../../../types/types';
 
 export const Title: React.FC<StyleProps> = ({ children }) => {
   return (

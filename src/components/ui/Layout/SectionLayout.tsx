@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionLayoutProps } from '../../types/types';
+import { SectionLayoutProps } from '../../../types/types';
 
 export const SectionLayout: React.FC<SectionLayoutProps> = ({ children, variant = 'primary' }) => {
   return (
