@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionTitleProps } from '../../types/types';
+import { SectionTitleProps } from '../../../types/types';
 
 export const SectionTitle: React.FC<SectionTitleProps> = ({ children, variant = 'primary' }) => {
   return (
