@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Title } from '../components/ui/Text/Title';
-import { PopulationGraphContainer } from '../components/populationGraph/PopulationGraph';
 import { SectionTitle } from '../components/ui/Text/SectionTitle';
 import { useHandleSelectedData } from '../hooks/useHandleSelectedData';
 import { SectionLayout } from '../components/ui/Layout/SectionLayout';
 import { Loading } from '../components/loading/Loading';
 import { Layout } from '../components/ui/Layout/Layout';
 import { Prefectures } from '../components/prefectures/Prefectures';
+import { PopulationGraphContainer } from '../components/populationGraph/PopulationGraph';
 
 export const PrefPopulationChart = () => {
   //チェックボックスを選択した際のロジック処理
