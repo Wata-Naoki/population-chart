@@ -10,15 +10,23 @@ export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefL
           return (
             <div
               key={pref.prefCode}
-              className={`flex gap-1 hover:shadow rounded px-1 text-zinc-500 hover:bg-zinc-400 hover:text-white hover:drop-shadow  border-transparent	transition-all hover:opacity-90	 duration-300  ease-out hover:ease-in ${
+              className={`flex gap-1 hover:shadow rounded px-1 text-zinc-500 hover:bg-zinc-400 hover:text-white hover:drop-shadow  border-transparent	transition-all hover:opacity-90	 duration-300 cursor-pointer ease-out hover:ease-in ${
                 prefList.find((prefListChild) => prefListChild.prefCode === pref.prefCode)
                   ? 'bg-zinc-400 text-white drop-shadow-2xl shadow-2xl'
                   : ''
               }`}
             >
               {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-              <input type='checkbox' value={pref.prefCode} onChange={handleChange} className='focus:outline-none' />
-              <p>{pref.prefName}</p>
+              <input
+                type='checkbox'
+                id={pref.prefCode}
+                value={pref.prefCode}
+                onChange={handleChange}
+                className='cursor-pointer'
+              />
+              <label htmlFor={pref.prefCode} className='cursor-pointer'>
+                {pref.prefName}
+              </label>
             </div>
           );
         })}

@@ -1,9 +1,8 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { convertToSeriesData } from '../../helpers/convertToSeriesData';
 import { PopulationGraphProps } from '../../types/types';
-
+import { convertToSeriesData } from '../../helpers/convertToSeriesData';
 //各都道府県の人口構成データをグラフに表示するコンポーネント
 export const PopulationGraphContainer: React.FC<PopulationGraphProps> = ({ prefList }) => {
   const options = {
