@@ -11,8 +11,6 @@ export const useHandleSelectedData = () => {
   const processing = useRef(false);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //    processing.current && return
-
     //選択した県の番号と名前を取得
     const prefValue = prefData?.result?.find((pref) => pref.prefCode == e.target.value);
     //選択した県がすでに選択されているか確認。
