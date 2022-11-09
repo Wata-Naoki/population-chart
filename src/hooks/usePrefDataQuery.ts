@@ -31,5 +31,6 @@ export const usePrefDataQuery = () => {
   return {
     prefData,
     isLoading,
+    setIsLoading,
   };
 };

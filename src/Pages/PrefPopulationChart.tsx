@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Layout } from '../components/ui/Layout/Layout';
-import { PopulationGraphContainer } from '../components/PopulationGraph/PopulationGraph';
+import { PopulationGraphContainer } from '../components/populationGraph/PopulationGraph';
 import { SectionTitle } from '../components/ui/Text/SectionTitle';
 import { Title } from '../components/ui/Text/Title';
-import { Loading } from '../components/Loading/Loading';
+import { Loading } from '../components/loading/Loading';
 import { useHandleSelectedData } from '../hooks/useHandleSelectedData';
-import { Prefectures } from '../components/Prefectures/Prefectures';
+import { Prefectures } from '../components/prefectures/Prefectures';
 import { SectionLayout } from '../components/ui/Layout/SectionLayout';
 
 export const PrefPopulationChart = () => {

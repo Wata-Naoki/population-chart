@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PopulationData } from '../types/types';
 import { usePopulationDataQuery } from './usePopulationDataQuery';
 import { usePrefDataQuery } from './usePrefDataQuery';
@@ -8,8 +8,11 @@ export const useHandleSelectedData = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { populationData, getPopulationData } = usePopulationDataQuery();
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
+  const processing = useRef(false);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    //    processing.current && return
+
     //選択した県の番号と名前を取得
     const prefValue = prefData?.result?.find((pref) => pref.prefCode == e.target.value);
     //選択した県がすでに選択されているか確認。
