@@ -2,11 +2,11 @@
 import { Layout } from '../components/ui/Layout/Layout';
 import { SectionTitle } from '../components/ui/Text/SectionTitle';
 import { Title } from '../components/ui/Text/Title';
-import { Loading } from '../components/loading/Loading';
 import { useHandleSelectedData } from '../hooks/useHandleSelectedData';
 import { Prefectures } from '../components/prefectures/Prefectures';
 import { SectionLayout } from '../components/ui/Layout/SectionLayout';
 import { PopulationGraphContainer } from '../components/populationGraph/PopulationGraph';
+import { Loading } from '../components/loading/Loading';
 
 export const PrefPopulationChart = () => {
   //チェックボックスを選択した際のロジック処理
