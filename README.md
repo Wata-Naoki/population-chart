@@ -7,6 +7,17 @@
 npm start
 ```
 
+## 環境変数の設定
+
+環境変数準備
+```bash
+cp .env.example .env
+```
+
+```bash
+REACT_APP_API_KEY=
+```
+
 
 ## テスト（playwrightというライブラリを使用）
 
