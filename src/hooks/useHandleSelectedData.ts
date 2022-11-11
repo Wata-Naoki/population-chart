@@ -8,7 +8,6 @@ export const useHandleSelectedData = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { populationData, getPopulationData } = usePopulationDataQuery();
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
-  const processing = useRef(false);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     //選択した県の番号と名前を取得
