@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Title } from '../components/ui/Text/Title';
 import { SectionTitle } from '../components/ui/Text/SectionTitle';
@@ -12,7 +13,7 @@ export const PrefPopulationChart = () => {
   //チェックボックスを選択した際のロジック処理
   const { prefData, isLoading, prefList, handleChange } = useHandleSelectedData();
 
-  if (isLoading) {
+  if (isLoading === 'loading') {
     return <Loading />;
   }
 

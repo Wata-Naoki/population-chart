@@ -1,42 +1,24 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { PrefData } from '../types/types';
 
-export const usePrefDataQuery = () => {
-  const [isLoading, setIsLoading] = useState(false);
+export const fetchPref = async () => {
+  //  const [isLoading, setIsLoading] = useState(false);
+  const response = await axios.get('https://opendata.resas-portal.go.jp/api/v1/prefectures', {
+    headers: {
+      'X-API-KEY': process.env.REACT_APP_API_KEY,
+    },
+  });
+  return response.data;
+};
 
-  const [prefData, setPrefData] = useState<{
-    message: null;
-    result: {
-      prefCode: string;
-      prefName: string;
-    }[];
-  }>();
-
-  //初回レンダリング時にapiからデータを取得
-  useEffect(() => {
-    const fetchPrefData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get('https://opendata.resas-portal.go.jp/api/v1/prefectures', {
-          headers: {
-            'X-API-KEY': process.env.REACT_APP_API_KEY,
-          },
-        });
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setPrefData(response.data);
-      } catch (e) {
-        console.log(e);
-        return;
-      }
-      setIsLoading(false);
-    };
-    fetchPrefData();
-  }, []);
-
-  return {
-    prefData,
-    isLoading,
-    setIsLoading,
-  };
+export const useQueryPrefData = () => {
+  return useQuery<PrefData, Error>({
+    queryKey: 'prefData',
+    queryFn: fetchPref,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 };

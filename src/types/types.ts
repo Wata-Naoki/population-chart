@@ -39,3 +39,11 @@ export type SectionLayoutProps = {
   children: React.ReactNode;
   variant?: 'primary' | 'sub';
 };
+
+export type PrefData = {
+  message: null;
+  result: {
+    prefCode: string;
+    prefName: string;
+  }[];
+};

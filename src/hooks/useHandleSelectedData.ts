@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PopulationData } from '../types/types';
 import { usePopulationDataQuery } from './usePopulationDataQuery';
-import { usePrefDataQuery } from './usePrefDataQuery';
+import { useQueryPrefData } from './usePrefDataQuery';
 
 export const useHandleSelectedData = () => {
-  const { prefData, isLoading } = usePrefDataQuery();
+  // const { prefData, isLoading } = usePrefDataQuery();
+  const { data: prefData, status: isLoading } = useQueryPrefData();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { populationData, getPopulationData } = usePopulationDataQuery();
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
