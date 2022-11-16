@@ -1,4 +1,4 @@
-# yumemi-frontend-population-chart
+# population-chart
 
 ## ローカル環境
 
