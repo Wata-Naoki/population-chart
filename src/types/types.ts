@@ -39,3 +39,29 @@ export type SectionLayoutProps = {
   children: React.ReactNode;
   variant?: 'primary' | 'sub';
 };
+// axiosから47都道府県のデータ取得用の型定義
+export type ResponsePrefData = {
+  message: null;
+  result: {
+    prefCode: string;
+    prefName: string;
+  }[];
+};
+// axiosから選択した県のデータ取得用の型定義
+export type ResponsePopulationData = {
+  message: string | null;
+  result: {
+    boundaryYear: number;
+    data: [
+      {
+        data: [
+          {
+            year: number;
+            value: number;
+          }
+        ];
+        label: string;
+      }
+    ];
+  };
+};

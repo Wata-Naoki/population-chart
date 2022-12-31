@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PopulationData } from '../types/types';
 import { usePopulationDataQuery } from './usePopulationDataQuery';
 import { usePrefDataQuery } from './usePrefDataQuery';
 
 export const useHandleSelectedData = () => {
   const { prefData, isLoading } = usePrefDataQuery();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { populationData, getPopulationData } = usePopulationDataQuery();
   const [prefList, setPrefList] = useState<PopulationData[]>([]);
 
@@ -34,9 +33,7 @@ export const useHandleSelectedData = () => {
       })
     );
     //prefListにないpopulationDataであれば追加
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (!prefList.find((pref) => pref.prefCode === populationData.prefCode)) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       setPrefList((prev) => [...prev, populationData]);
     }
   }, [populationData]);

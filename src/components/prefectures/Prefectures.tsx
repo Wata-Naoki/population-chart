@@ -16,7 +16,6 @@ export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefL
                   : ''
               }`}
             >
-              {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
               <input
                 type='checkbox'
                 id={pref.prefCode}

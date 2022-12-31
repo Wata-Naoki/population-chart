@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios';
 import { useCallback, useState } from 'react';
-import { PopulationData, SelectedPref } from '../types/types';
+import { PopulationData, ResponsePopulationData, SelectedPref } from '../types/types';
 
 export const usePopulationDataQuery = () => {
   const [populationData, setPopulationData] = useState<PopulationData>({
@@ -16,7 +13,7 @@ export const usePopulationDataQuery = () => {
   const getPopulationData = useCallback(async ({ prefCode, prefName }: SelectedPref) => {
     if (prefCode) {
       try {
-        const response = await axios.get(
+        const response = await axios.get<ResponsePopulationData>(
           `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?&prefCode=${prefCode}`,
           {
             headers: {
