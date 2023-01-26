@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Title } from '../components/ui/Text/Title';
 import { SectionTitle } from '../components/ui/Text/SectionTitle';
 import { useHandleSelectedData } from '../hooks/useHandleSelectedData';

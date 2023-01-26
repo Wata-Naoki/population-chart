@@ -12,5 +12,13 @@
     "project": "./tsconfig.json"
   },
   "env": { "browser": true, "node": true, "es6": true },
-  "rules": { "@typescript-eslint/no-unsafe-assignment": "error" }
+  "rules": {
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
+  }
 }
