@@ -9,7 +9,7 @@ import { Loading } from '../components/loading/Loading';
 
 export const PrefPopulationChart = () => {
   //チェックボックスを選択した際のロジック処理
-  const { prefData, isLoading, prefList, handleChange } = useHandleSelectedData();
+  const { prefData, isLoading, prefList, handleChange, isFetching } = useHandleSelectedData();
 
   if (isLoading) {
     return <Loading />;
@@ -21,7 +21,7 @@ export const PrefPopulationChart = () => {
 
       <SectionLayout>
         <SectionTitle>都道府県</SectionTitle>
-        <Prefectures handleChange={handleChange} prefData={prefData} prefList={prefList} />
+        <Prefectures handleChange={handleChange} prefData={prefData} prefList={prefList} isFetching={isFetching} />
       </SectionLayout>
 
       <SectionLayout variant='sub'>

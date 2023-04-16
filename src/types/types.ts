@@ -24,6 +24,7 @@ export type PrefProps = {
     | undefined;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   prefList: PopulationData[];
+  isFetching: boolean;
 };
 //スタイルの型定義
 export type StyleProps = {
