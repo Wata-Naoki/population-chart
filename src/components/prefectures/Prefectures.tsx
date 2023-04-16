@@ -1,8 +1,7 @@
 import React from 'react';
 import { PrefProps } from '../../types/types';
 
-//47都道府県を表示するコンポーネント
-export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefList }) => {
+export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefList, isFetching }) => {
   return (
     <>
       <div className='flex flex-wrap items-center justify-start w-full gap-3 py-4 pl-6 sm:p-6'>
@@ -21,6 +20,7 @@ export const Prefectures: React.FC<PrefProps> = ({ handleChange, prefData, prefL
                 id={pref.prefCode}
                 value={pref.prefCode}
                 onChange={handleChange}
+                disabled={isFetching}
                 className='cursor-pointer'
               />
               <label htmlFor={pref.prefCode} className='cursor-pointer'>
