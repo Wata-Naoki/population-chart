@@ -19,7 +19,7 @@ REACT_APP_API_KEY=
 ```
 
 
-## テスト（playwrightというライブラリを使用）
+## テスト（playwrightを使用）
 
 テストコマンドを実行
 
